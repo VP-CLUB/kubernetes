@@ -1,0 +1,2 @@
+cp ubuntu/config-default.sh.bak  ubuntu/config-default.sh
+cp ubuntu/download-release.sh.bak ubuntu/download-release.sh

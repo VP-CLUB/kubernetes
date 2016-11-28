@@ -1,0 +1,30 @@
+server:
+  port: 10020
+shell:
+  ssh:
+    port: 33020
+  auth:
+    simple:
+      user:
+        name: vpclub
+        password: vp01b#6
+spring:
+  data:
+     mongodb:
+       host: 10.46.125.194
+       port: 27017
+       database: admin
+  dubbo:
+    protocol:
+      name: dubbo
+      port: 23020
+      accesslog: true
+
+    registry:
+      address: zookeeper://10.46.125.195:2181
+      register: true
+      subscribe: true
+platform:
+     domain: "http://yytapi.vpclub.cn/api/1.0"
+     method:
+        login: "/StoreServer/Store/VerifyAccount"

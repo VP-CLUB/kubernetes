@@ -1,0 +1,5 @@
+for n in 172.16.2.234 172.16.2.233 172.16.2.238 172.16.2.240; do
+ssh root@$n ;
+docker start router;
+done
+

@@ -1,0 +1,43 @@
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  name: fluentd-logging
+  namespace: default
+spec:
+  template:
+    metadata:
+      labels:
+        app: fluentd-logging
+    spec:
+      dnsPolicy: "ClusterFirst"
+      restartPolicy: "Always"
+      imagePullSecrets:
+      - name: aliregistrykey
+      containers:
+      - name: fluentd-logging
+        image: hub.docker.vpclub.cn/vpclub_containers/fluentd-elasticsearch:1.21
+        resources:
+          limits:
+            memory: 200Mi
+          requests:
+            cpu: 100m
+            memory: 200Mi
+        env:
+        - name: "ELASTICSEARCH_URL"
+          value: "${ELASTICSEARCH_HOST}"
+        - name: TZ
+          value: Asia/Shanghai
+        volumeMounts:
+        - name: varlog
+          mountPath: /var/log
+        - name: varlibdockercontainers
+          mountPath: /var/lib/docker/containers
+          readOnly: true
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: varlog
+        hostPath:
+          path: /var/log
+      - name: varlibdockercontainers
+        hostPath:
+          path: /var/lib/docker/containers

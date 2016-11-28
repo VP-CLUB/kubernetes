@@ -1,0 +1,11 @@
+for n in 172.16.5.40 172.16.5.41; do 
+scp .docker/config.json vpclub@$n:/root/.docker/config.json; 
+done
+
+
+for n in 172.16.2.234 172.16.2.233 172.16.2.238 172.16.2.240; do
+
+ssh root@$n ;
+docker start router;
+done
+

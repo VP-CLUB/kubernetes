@@ -1,0 +1,2 @@
+KUBELET_OPTS=" --hostname-override=172.16.2.238  --api-servers=http://172.16.2.234:8080  --logtostderr=true  --cluster-dns=192.168.3.10  --pod-infra-container-image=docker.io/kubernetes/pause:latest  --cluster-domain=cluster.local  --config=${KUBELET_CONFIG}  --allow-privileged=false
+ "

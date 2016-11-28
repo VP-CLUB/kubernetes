@@ -1,0 +1,1 @@
+KUBE_PROXY_OPTS=" --hostname-override=172.16.2.238  --master=http://172.16.2.234:8080  --logtostderr=true  "

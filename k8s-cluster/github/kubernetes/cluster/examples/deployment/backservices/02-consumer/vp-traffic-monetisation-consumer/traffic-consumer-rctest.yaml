@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: netisation-consumer-rc
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: netisation-consumer
+    spec:
+      imagePullSecrets:
+      - name: aliregistrykey
+      containers:
+      - name: vp-traffic-monetisation-consumer
+        image: hub.docker.vpclub.cn/vpclub/java:8
+        ports:
+        - containerPort: 10020
+        env:
+        - name: PROFILE
+          value: test
+        ports:
+        volumeMounts:
+        - name: netisation-consumer-vol
+          mountPath: /app
+      volumes:
+      - name: netisation-consumer-vol
+        hostPath:
+          path: ./app

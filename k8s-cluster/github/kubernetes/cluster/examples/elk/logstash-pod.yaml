@@ -1,0 +1,28 @@
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+   name: logstash-dev
+   namespace: default
+spec:
+   nodeSelector:
+     node: 172.16.2.234
+   #在有该标签的Node上生成，如果没有该标签，就是所有Node上生成
+#volumes:
+#- name: "logstash-django-log"
+#  hostPath:
+#     path: "/var/lib/docker/logstash-logs"
+   #该Node上的公共挂载路径，日志保存在这里，Logstash监控改路径
+   imagePullSecrets:
+   - name: aliregistrykey
+   containers:
+   - name: logstash-dev
+     image: hub.docker.vpclub.cn/vpclub_containers/logstash:dev
+     volumeMounts:
+     - name: "logstash-log"
+       mountPath: "/gikoo-logs/"
+     command: ["logstash","agent","-f","/logstash.conf"]
+#       restartPolicy: Always
+   volumes:
+   - name: "logstash-django-log"
+     hostPath:
+       path: "/var/lib/docker/logstash-logs"

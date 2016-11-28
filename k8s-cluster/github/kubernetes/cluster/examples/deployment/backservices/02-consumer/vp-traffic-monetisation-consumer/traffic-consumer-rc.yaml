@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: traffic-consumer
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: traffic
+    spec:
+      containers:
+      - name: vp-traffic-monetisation-consumer
+        image: hub.docker.vpclub.cn/vpclub_containers/vp-traffic-monetisation-consumer
+        ports:
+        - containerPort: 10020
+#        - port: 10010
+      imagePullSecrets:
+      - name: aliregistrykey
+

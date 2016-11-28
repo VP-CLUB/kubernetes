@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: traffic-svc
+  labels:
+    app: traffic
+spec:
+  ports:
+  - port: 80
+    targetPort: 10010
+    protocol: TCP
+    name: http
+  selector:
+    app: traffic
